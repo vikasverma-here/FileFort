@@ -5,13 +5,13 @@ const authenticateUser = async(req,res,next)=>{
   try{
     
     const token = req.cookies.Token;
-   console.log(token)
+  //  console.log(token)
     if(!token){
         return res.status(400).json({success:false,message:"Unauthrized : token not provided"})
     }
 
     const decoded = jwt.verify(token,process.env.JWT_SECRET)
-   console.log(decoded)
+  //  console.log(decoded)
    const user = await User.findById(decoded.id)
 
    if (!user) {
