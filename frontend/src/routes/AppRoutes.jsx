@@ -11,28 +11,6 @@ import Guide from '../pages/guide';
 import Files from '../pages/Files';
 
 
-{/* <div>
-<nav>
-<NavLink to="/">
-<div>
-   <img src="" alt="" />
-   home
-</div>
-</NavLink>
-<NavLink to="/upload">Upload</NavLink>
-<NavLink to="/files">files</NavLink>
-<NavLink to="/dashboard">Dashboard</NavLink>
-<NavLink to="/guide">FileFort Guide</NavLink>
-<div className="div">
-<NavLink to="/login">Login</NavLink>
-<NavLink to="/register">Register</NavLink>
-<NavLink to="/logout">Logout</NavLink>
-<NavLink to="/profile">Profile</NavLink>
-</div>
-
-</nav>
-</div> */}
-
 function AppRoutes() {
   return (
     <Routes>

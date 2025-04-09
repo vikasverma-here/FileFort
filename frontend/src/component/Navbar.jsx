@@ -17,7 +17,7 @@ const Navbar = () => {
           <img
             src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Fort_Lauderdale_United_FC_logo_2024.png"
             alt="Logo"
-            className="h-8 w-8"
+            className="h-10 w-10"
           />
         </NavLink>
 

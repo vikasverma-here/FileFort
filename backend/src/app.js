@@ -6,7 +6,12 @@ const cookieParser = require('cookie-parser');
 const errorHandler = require('./middlewares/errorHandler');
 const uploadRouter = require("./routes/uploadRoute")
 const cors = require("cors")
-app.use(cors())
+app.use(cors(
+    {
+        origin: "http://localhost:5173",  // your React app URL
+        credentials: true     
+    }
+))
 app.use(express.json())
 app.use(cookieParser())
 app.use(express.urlencoded({extended:true}))
