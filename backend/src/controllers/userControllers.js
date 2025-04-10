@@ -35,3 +35,11 @@ module.exports.getUserMedia = async (req, res) => {
     });
   }
 };
+
+
+module.exports.getProfile=async(req,res)=>{
+  res.json({
+    message: "Profile data fetched successfully",
+    user: req.user
+  })
+}

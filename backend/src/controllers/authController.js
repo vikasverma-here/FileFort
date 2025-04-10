@@ -4,13 +4,14 @@ const mongoose = require("mongoose")
 const { validationResult, cookie } = require("express-validator");
 const bcrypt = require("bcrypt")
 const User = require("../models/use.model")
+const validator = require('validator');
 
 const jwt = require("jsonwebtoken")
 
 module.exports.signUp = async (req, res) => {
 
 try{
-    const { name, email, password } = req.body;
+    const { name, email, password,phone } = req.body;
   
     const errors = validationResult(req);
   
@@ -18,6 +19,8 @@ try{
       return res.status(400).json({ success: false, errors: errors.array() });
     }
   
+
+    
     const existingUser = await User.findOne({ email });
     if (existingUser) {
       return res.status(400).json({ message: "User already exists" });
@@ -29,6 +32,7 @@ try{
       name,
       email,
       password: hashedPassword,
+      phone
     });
   
     const token = jwt.sign({id:user._id},process.env.JWT_SECRET,{expiresIn:"7d"})
@@ -103,5 +107,14 @@ res.cookie("Token", token, {
   }
 }
 
+module.exports.logOut = async(req,res)=>{
+  const token = req.cookies.Token
+  
+  if(!token){
+   return res.status(404).json({success:false,message:"User not logged in. Please login first"})
+  }
 
+  res.clearCookie('Token')
+  res.status(200).json({success:true,message:"logged out successfully"})
 
+}

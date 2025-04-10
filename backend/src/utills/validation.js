@@ -14,7 +14,17 @@ const validateUser = [
     body("password")
       .notEmpty().withMessage("Password is required")
       .isLength({ min: 6,max:10 }).withMessage("Password must be at least 6-10 characters")
-      .isStrongPassword().withMessage("Please set Strong password")
+      .isStrongPassword().withMessage("Please set Strong password"),
+
+      body('phone')
+      .notEmpty().withMessage('Phone number is required')
+      .custom((value) => {
+        const validator = require('validator');
+        if (!validator.isMobilePhone(value, 'en-IN')) {
+          throw new Error('Invalid Indian phone number');
+        }
+        return true;
+      }),
   ];
 
 

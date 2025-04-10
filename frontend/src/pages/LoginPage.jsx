@@ -1,19 +1,36 @@
 import React, { useState } from 'react';
 import { motion } from 'framer-motion';
+import axios from 'axios';
+import { toast } from 'react-toastify';
+import { useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
   const [password, setPassword] = useState('');
-  const [submitted, setSubmitted] = useState(false);
+  const navigate = useNavigate()
+  // const [submitted, setSubmitted] = useState(false);
 
-  const handleSubmit = (e) => {
+  const handleSubmit = async(e) => {
     e.preventDefault();
-    if (email && password) {
-      setSubmitted(true);
-      setTimeout(() => setSubmitted(false), 3000);
-      setEmail('');
-      setPassword('');
-    }
+    
+      // setSubmitted(true);
+      // setTimeout(() => setSubmitted(false), 3000);
+
+  try{
+    const response = await axios.post("http://localhost:4000/api/auth/login",{email,password},{withCredentials:true})
+
+    console.log(response)
+    toast(response.data.message)
+    navigate("/")
+  }catch(error){
+    toast("invalid password")
+    console.error("login error",error)
+    
+  }
+
+      // setEmail('');
+      // setPassword('');
+    
   };
 
   return (
@@ -65,7 +82,7 @@ const Login = () => {
             Login
           </button>
 
-          {submitted && (
+          {/* {submitted && (
             <motion.p
               initial={{ opacity: 0 }}
               animate={{ opacity: 1 }}
@@ -73,7 +90,7 @@ const Login = () => {
             >
               Login Successful!
             </motion.p>
-          )}
+          )} */}
         </form>
       </motion.div>
     </motion.div>

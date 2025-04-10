@@ -1,13 +1,27 @@
-import React, { useState } from 'react'
+import React, { useContext, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { motion } from 'framer-motion'
+import axios from 'axios'
+import { AppContext } from '../context/Context'
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
-
+  const {user,setUser}  = useContext(AppContext)
+  
+  // console.log("is user comming from user",user)
   const toggleMenu = () => {
     setMenuOpen(!menuOpen)
   }
+
+const handleClick=async()=>{
+  console.log("clicked profile")
+  try{
+   const response = await axios.get("http://localhost:4000/api/user/profile",{withCredentials:true})
+   setUser(response.data.user)
+  }catch(error){
+    console.log(error)
+  }
+}
 
   return (
     <div className="bg-gray-900 text-white shadow-md">
@@ -15,6 +29,7 @@ const Navbar = () => {
 
         <NavLink to="/" className="flex items-center gap-2">
           <img
+           
             src="https://upload.wikimedia.org/wikipedia/commons/e/e0/Fort_Lauderdale_United_FC_logo_2024.png"
             alt="Logo"
             className="h-10 w-10"
@@ -48,6 +63,7 @@ const Navbar = () => {
           <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
             <NavLink to="/profile" className="flex items-center">
               <img
+               onClick={handleClick}
                 src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg"
                 alt="Profile"
                 className="h-10 w-10 rounded-full object-cover border-2 border-green-500"
@@ -80,8 +96,9 @@ const Navbar = () => {
             <NavLink to="/guide" onClick={toggleMenu} className="hover:text-blue-400">FileFort Guide</NavLink>
             <NavLink to="/login" onClick={toggleMenu} className="bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded-md text-sm text-center">Login</NavLink>
             <NavLink to="/register" onClick={toggleMenu} className="bg-blue-600 hover:bg-blue-700 px-3 py-2 rounded-md text-sm text-center">Register</NavLink>
-            <NavLink to="/profile" onClick={toggleMenu} className="flex items-center justify-center">
+            <NavLink  to="/profile" onClick={toggleMenu}  className="flex items-center justify-center">
               <img
+                 onClick={handleClick}
                 src="https://img.freepik.com/free-vector/blue-circle-with-white-user_78370-4707.jpg"
                 alt="Profile"
                 className="h-10 w-10 rounded-full object-cover border-2 border-green-500"

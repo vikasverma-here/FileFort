@@ -37,12 +37,12 @@ const RegisterPage = () => {
        setsignUp(response.data)
         setSubmitted(true);
         setTimeout(() => setSubmitted(false), 3000);
-        setFormData({
-          name: '',
-          email: '',
-          password: '',
-          phone: '',
-        });
+        // setFormData({
+        //   name: '',
+        //   email: '',
+        //   password: '',
+        //   phone: '',
+        // });
 
       const success = response.data.message
       toast(success)
