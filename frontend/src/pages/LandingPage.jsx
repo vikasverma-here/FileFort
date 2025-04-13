@@ -1,8 +1,9 @@
 import React from "react";
 import { motion } from "framer-motion";
 import heroImg from "../assets/hero.svg";
-
+import { useNavigate } from "react-router-dom";
 const LandingPage = () => {
+  const navigat = useNavigate()
   return (
     <div className="flex flex-col min-h-screen bg-gradient-to-br from-purple-50 to-blue-100 text-gray-800">
 
@@ -61,23 +62,24 @@ const LandingPage = () => {
           </p>
         </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 px-6 md:px-8 max-w-7xl mx-auto">
-          {[
-            { title: "Ultimate Security", desc: "End-to-end encryption to keep your files safe." },
-            { title: "Blazing Fast", desc: "Instant uploads and downloads anytime, anywhere." },
-            { title: "Easy Collaboration", desc: "Share and collaborate effortlessly with teams." }
-          ].map((item, index) => (
-            <motion.div
-              key={index}
-              className="bg-purple-100 p-8 rounded-2xl shadow-lg hover:shadow-2xl text-center"
-              whileHover={{ scale: 1.05 }}
-              transition={{ duration: 0.3 }}
-            >
-              <h3 className="text-2xl font-semibold mb-4">{item.title}</h3>
-              <p className="text-gray-700">{item.desc}</p>
-            </motion.div>
-          ))}
-        </div>
+        <div className="grid grid-cols-1 md:grid-cols-3 gap-10 px-6 md:px-10 max-w-7xl mx-auto py-20">
+  {[
+    { title: "Secure Uploads", desc: "Upload your images safely with complete end-to-end encryption. We ensure your files are always protected." },
+    { title: "Easy Sharing", desc: "Create shareable links with one click and send your images to anyone instantly without compromising on privacy." },
+    { title: "Fast Downloads", desc: "No delays. Download your images anytime, from anywhere, at lightning speed, with absolutely no restrictions." },
+    { title: "Mobile Friendly", desc: "Enjoy a smooth, responsive experience across all devices — whether it's your phone, tablet, or desktop." },
+    { title: "24/7 Support", desc: "We are here whenever you need us. Reach out to our friendly support team anytime, any day." }
+  ].map((item, index) => (
+    <div
+      key={index}
+      className="bg-gray-100 p-12 rounded-3xl text-center border hover:shadow-xl transition-all min-h-[350px] flex flex-col justify-center"
+    >
+      <h3 className="text-3xl font-bold mb-6">{item.title}</h3>
+      <p className="text-gray-600 text-lg">{item.desc}</p>
+    </div>
+  ))}
+</div>
+
       </section>
 
       {/* How it Works */}
@@ -111,37 +113,44 @@ const LandingPage = () => {
 
       {/* Testimonials */}
       <section className="py-20 bg-white">
-        <div className="text-center mb-16 px-4">
-          <motion.h2
-            className="text-4xl font-bold mb-6"
-            initial={{ opacity: 0 }}
-            whileInView={{ opacity: 1 }}
-            transition={{ duration: 0.8 }}
-          >
-            Users Love FileFort
-          </motion.h2>
-          <p className="text-gray-600 max-w-2xl mx-auto">
-            Join thousands of happy users who trust FileFort every day.
-          </p>
-        </div>
+  <div className="text-center mb-16 px-4">
+    <motion.h2
+      className="text-4xl font-bold mb-6"
+      initial={{ opacity: 0, y: -50 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.6 }}
+    >
+      Users Love FileFort
+    </motion.h2>
+    <p className="text-gray-600 max-w-2xl mx-auto">
+      Join thousands of happy users who trust FileFort every day.
+    </p>
+  </div>
 
-        <div className="grid grid-cols-1 md:grid-cols-3 gap-8 px-6 md:px-8 max-w-7xl mx-auto">
-          {[
-            "Life saver for file storage!",
-            "Super fast and very secure!",
-            "The best app for sharing files!"
-          ].map((review, index) => (
-            <motion.div
-              key={index}
-              className="bg-purple-50 p-6 rounded-2xl text-center shadow hover:shadow-lg"
-              whileHover={{ scale: 1.05 }}
-            >
-              <p className="text-gray-700 mb-4">"{review}"</p>
-              <h5 className="font-bold text-purple-900">- User {index + 1}</h5>
-            </motion.div>
-          ))}
-        </div>
-      </section>
+  <div className="grid grid-cols-1 md:grid-cols-3 gap-10 px-6 md:px-8 max-w-7xl mx-auto">
+    {[
+      { img: "https://randomuser.me/api/portraits/women/44.jpg", review: "FileFort made my life so easy!", name: "Sophia Lee" },
+      { img: "https://randomuser.me/api/portraits/men/32.jpg", review: "Super fast uploads and downloads!", name: "James Carter" },
+      { img: "https://randomuser.me/api/portraits/women/68.jpg", review: "Secure and very simple to use.", name: "Olivia Smith" }
+    ].map((user, index) => (
+      <motion.div
+        key={index}
+        className="bg-purple-50 p-8 rounded-3xl shadow-md hover:shadow-2xl text-center flex flex-col items-center"
+        whileHover={{ scale: 1.05, rotate: 1 }}
+        transition={{ type: "spring", stiffness: 200 }}
+      >
+        <img
+          src={user.img}
+          alt={user.name}
+          className="w-20 h-20 rounded-full object-cover mb-6 border-4 border-purple-200"
+        />
+        <p className="text-gray-700 mb-4">"{user.review}"</p>
+        <h5 className="font-bold text-purple-900">- {user.name}</h5>
+      </motion.div>
+    ))}
+  </div>
+</section>
+
 
       {/* Call to Action */}
       <section className="py-20 bg-purple-600 text-white text-center px-4">
@@ -156,6 +165,7 @@ const LandingPage = () => {
         <motion.button
           className="bg-white text-purple-600 font-bold px-8 py-4 rounded-full hover:bg-gray-100"
           whileHover={{ scale: 1.1 }}
+          onClick={()=>navigat("/login")}
         >
           Get Started
         </motion.button>

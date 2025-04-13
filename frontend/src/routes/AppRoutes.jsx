@@ -7,7 +7,7 @@ import LoginPage from '../pages/LoginPage';
 import RegisterPage from '../pages/RegisterPage';
 import Profile from '../pages/Profile';
 import Upload from '../pages/Upload';
-import Guide from '../pages/guide';
+import Guide from '../pages/Guide';
 import Files from '../pages/Files';
 
 

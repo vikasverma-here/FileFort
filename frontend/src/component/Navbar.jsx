@@ -2,7 +2,7 @@ import React, { useContext, useState } from 'react'
 import { NavLink } from 'react-router-dom'
 import { motion } from 'framer-motion'
 import axios from 'axios'
-import { AppContext } from '../context/Context'
+import { AppContext } from '../context/context'
 
 const Navbar = () => {
   const [menuOpen, setMenuOpen] = useState(false)
@@ -44,9 +44,9 @@ const handleClick=async()=>{
           <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
             <NavLink to="/files" className="hover:text-blue-400 transition">Files</NavLink>
           </motion.div>
-          <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
+          {/* <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
             <NavLink to="/dashboard" className="hover:text-blue-400 transition">Dashboard</NavLink>
-          </motion.div>
+          </motion.div> */}
           <motion.div whileHover={{ scale: 1.1 }} whileTap={{ scale: 0.95 }}>
             <NavLink to="/guide" className="hover:text-blue-400 transition">FileFort Guide</NavLink>
           </motion.div>

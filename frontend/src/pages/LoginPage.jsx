@@ -2,7 +2,7 @@ import React, { useState } from 'react';
 import { motion } from 'framer-motion';
 import axios from 'axios';
 import { toast } from 'react-toastify';
-import { useNavigate } from 'react-router-dom';
+import { Link, useNavigate } from 'react-router-dom';
 
 const Login = () => {
   const [email, setEmail] = useState('');
@@ -91,6 +91,16 @@ const Login = () => {
               Login Successful!
             </motion.p>
           )} */}
+     <div className="text-center text-gray-600 ">
+  Don't have an account?{' '}
+  <Link
+    to="/register"
+    className="text-purple-600 font-semibold hover:underline hover:text-purple-800 transition duration-300"
+  >
+   Register
+  </Link>
+</div>
+
         </form>
       </motion.div>
     </motion.div>

@@ -6,7 +6,7 @@ const steps = [
   { title: "Login", description: "Already registered? Login to access your secure files and dashboard." },
   { title: "Upload Files", description: "Upload images, videos, or documents easily through the Upload page." },
   { title: "Manage Your Files", description: "View, download, or delete your files anytime from the Files section." },
-  { title: "Dashboard Overview", description: "Monitor your storage space and file stats in the Dashboard." },
+  // { title: "Dashboard Overview", description: "Monitor your storage space and file stats in the Dashboard." },
   { title: "Profile Settings", description: "Click your profile picture to update settings or logout." },
   { title: "Need Help?", description: "Facing issues? Revisit this guide or contact support for assistance." },
 ];

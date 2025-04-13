@@ -1,7 +1,7 @@
 import { useEffect, useState } from "react";
 import axios from "axios";
 import { toast } from "react-toastify";
-
+import { motion } from "framer-motion"
 function Files() {
   const [media, setMedia] = useState([]);
   const [loading, setLoading] = useState(true);
@@ -69,6 +69,15 @@ function Files() {
                 Uploaded on: {formatDate(file.createdAt)}
               </p>
 
+              <div className="flex items-center gap-2 ml-auto mt-2">
+    <button className="bg-blue-600 text-white py-1 px-2 rounded-lg hover:bg-blue-700 transition duration-300">
+    <i class="ri-file-download-fill"></i>
+    </button>
+    <button className="bg-green-600 text-white py-1 px-2 rounded-lg hover:bg-green-700 transition duration-300">
+    <i class="ri-share-line"></i>
+    </button>
+  </div>
+
               {/* Uploader Details */}
               {file.uploadedBy && (
                 <div className="flex items-center gap-3 mt-4">
@@ -81,6 +90,9 @@ function Files() {
                     <p className="text-sm font-medium">{file.uploadedBy.name}</p>
                     <p className="text-xs text-gray-400">{file.uploadedBy.email}</p>
                   </div>
+
+                 
+                 
                 </div>
               )}
             </div>
