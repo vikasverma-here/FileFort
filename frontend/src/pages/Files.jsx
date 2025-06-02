@@ -68,15 +68,61 @@ function Files() {
               <p className="text-xs text-gray-400 mt-1">
                 Uploaded on: {formatDate(file.createdAt)}
               </p>
+<div className="flex items-center gap-2 ml-auto mt-2">
+  {/* Download Button */}
 
-              <div className="flex items-center gap-2 ml-auto mt-2">
-    <button className="bg-blue-600 text-white py-1 px-2 rounded-lg hover:bg-blue-700 transition duration-300">
-    <i class="ri-file-download-fill"></i>
-    </button>
-    <button className="bg-green-600 text-white py-1 px-2 rounded-lg hover:bg-green-700 transition duration-300">
-    <i class="ri-share-line"></i>
-    </button>
-  </div>
+<button
+  className="bg-blue-600 text-white py-1 px-2 rounded-lg hover:bg-blue-700 transition duration-300"
+  onClick={async () => {
+    try {
+      const response = await fetch(file.path, { mode: 'cors' });
+      const blob = await response.blob();
+      const url = window.URL.createObjectURL(blob);
+
+      const link = document.createElement('a');
+      link.href = url;
+      link.download = file.originalname;
+      document.body.appendChild(link);
+      link.click();
+      link.remove();
+      window.URL.revokeObjectURL(url);
+    } catch (error) {
+      console.error("Download failed", error);
+      toast.error("Download failed");
+    }
+  }}
+>
+  <i className="ri-file-download-fill"></i>
+</button>
+
+  {/* Share Button */}
+  <button
+    className="bg-green-600 text-white py-1 px-2 rounded-lg hover:bg-green-700 transition duration-300"
+    onClick={async () => {
+      const shareData = {
+        title: file.originalname,
+        text: "Check out this file!",
+        url: file.path,
+      };
+
+      try {
+        if (navigator.share) {
+          await navigator.share(shareData);
+        } else {
+          await navigator.clipboard.writeText(file.path);
+          toast.success("Link copied to clipboard!");
+        }
+      } catch (error) {
+        console.error("Sharing failed", error);
+        toast.error("Sharing failed");
+      }
+    }}
+  >
+    <i className="ri-share-line"></i>
+  </button>
+</div>
+
+
 
               {/* Uploader Details */}
               {file.uploadedBy && (
